@@ -21,5 +21,16 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 export HOME=/root
 export SHELL=/bin/sh
 
+# Set the CPU governors to performance
+# This is needed for devices with buggy governors (most T310/T618/H700 devices)
+# It's currently enabled for all devices to make debugging easier
+for policy_dir in /sys/devices/system/cpu/cpufreq/policy*
+do
+	if [ -d "$policy_dir" ]
+	then
+		echo performance > "$policy_dir/scaling_governor"
+	fi
+done
+
 # And hand off control to the rootfs
 chroot /root /usr/bin/init
