@@ -7,7 +7,7 @@ mount -t f2fs -o loop /boot/boot/rootfs.f2fs /root
 mount -o bind /boot /root/media
 
 # Iterate the required folders
-for f in dev dev/pts proc sys tmp firmware vendor/firmware lib/firmware lib/modules
+for f in dev dev/pts proc sys tmp firmware vendor/firmware lib/firmware lib/modules device-resources
 do
 	# Create a mount point
 	mkdir -p /root/$f
